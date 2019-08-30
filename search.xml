@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Untitled]]></title>
+    <url>%2F2019%2F08%2F19%2FUntitled-1%2F</url>
+    <content type="text"><![CDATA[一、OSI七层模型 表示 说明 作用 应用层 HTTP、ftp 协议表示层 UTF-8 将应用层协议翻译成计算机可识别的语言会话层 管理传输层传输层 TCP/UDP 建立以及断开连接网络层 IP 1、寻址；2、身份确认数据链路层 MAC物理地址 两设备间的互相通信物理层 传输媒介 将0/1转换成光/电信号]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[hello]]></title>
     <url>%2F2019%2F08%2F15%2Fhello%2F</url>
     <content type="text"><![CDATA[hihcuvvvf[pqfjioflof]]></content>
