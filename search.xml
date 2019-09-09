@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[博客搭建]]></title>
     <url>%2F2019%2F09%2F09%2F%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%2F</url>
-    <content type="text"><![CDATA[博客搭建利用虚拟机在Ubauntu或者deepin 搭建简易网站，利用GitHub.io和hexo.io 0、环境检测 1、系统升级（图形更新） #update-manager 检测状态 2、检测升级（命令更新） #sudo apt update #sudo apt -y dist-upgrade一、安装hexo博客本地段 1、安装软件管理工具 #sudo apt -y install npm 如果安装不了，安装替补npm软件管理器 #sudo apt -y install node node-bin 2、通过npm安装hexo #sudo npm install hexo-cli -g 3、安装下载程序（Git工具包） #sudo apt -y install git 4、开始部署本地端（hexo） #sudo hexo init blog（博客文件名可以修改) 出现“安装错误”，补救法： #cd blog #sudo npm install注意：安装过程卡顿时间过长“Ctrl+C”停止，从第1步再试一次，请多次尝试。 二、运行测试环境 1、进入hexo目录 #sudo hexo g 2、初始化hexo #cd blog(博客文件名) 3、运行本地服务端 #sudo hexo s 4、测试访问 #sudo firefox localhost:4000 x-special/nautilus-clipboardx-special/nautilus-clipboardcopyfile:///home/fdd/blog/public/images/pasted-1.jpg 注意等第3步完成后，在虚拟机Google浏览器或者Firefox浏览器网址输入端输入：localhost:4000，若出现以下界面，则本地端搭建成功。]]></content>
+    <content type="text"><![CDATA[博客搭建利用虚拟机在Ubauntu或者deepin 搭建简易网站，利用GitHub.io和hexo.io 0、环境检测 1、系统升级（图形更新） #update-manager 检测状态 2、检测升级（命令更新） #sudo apt update #sudo apt -y dist-upgrade一、安装hexo博客本地段 1、安装软件管理工具 #sudo apt -y install npm 如果安装不了，安装替补npm软件管理器 #sudo apt -y install node node-bin 2、通过npm安装hexo #sudo npm install hexo-cli -g 3、安装下载程序（Git工具包） #sudo apt -y install git 4、开始部署本地端（hexo） #sudo hexo init blog（博客文件名可以修改) 出现“安装错误”，补救法： #cd blog #sudo npm install注意：安装过程卡顿时间过长“Ctrl+C”停止，从第1步再试一次，请多次尝试。 二、运行测试环境 1、进入hexo目录 #sudo hexo g 2、初始化hexo #cd blog(博客文件名) 3、运行本地服务端 #sudo hexo s 4、测试访问 #sudo firefox localhost:4000 x-special/nautilus-clipboard注意等第3步完成后，在虚拟机Google浏览器或者Firefox浏览器网址输入端输入：localhost:4000，若出现以下界面，则本地端搭建成功。]]></content>
       <tags>
         <tag>网站搭建</tag>
       </tags>
