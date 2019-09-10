@@ -254,6 +254,425 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com2019/09/10/IP地址的获取/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="无荨">
+      <meta itemprop="description" content="自己的选择，再累也要走完">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无荨の博客">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+              
+              <a href="2019/09/10/IP地址的获取/" class="post-title-link" itemprop="url">IP地址的获取</a>
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-10 19:18:00 / 修改时间：19:33:36" itemprop="dateCreated datePublished" datetime="2019-09-10T19:18:00+08:00">2019-09-10</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="categories/linux/dhcp/" itemprop="url" rel="index"><span itemprop="name">dhcp</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <p>在Linux最小安装之后，一般需要手动配置网络地址。</p>
+<p>一、简单的利用DHCP获取</p>
+<p>1、进网卡配置文件</p>
+<p><code>cd /etc/sysconfig/network-scripts/</code></p>
+<p>2、列出network-scripts目录下的文件</p>
+<p><code>ls /etc/sysconfig/network-scripts/</code></p>
+<p>3、找到ifcfg-ens33,进入ifcfg-ens33文件，修改onboot的no为yes</p>
+<p>4、重启网络地址：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Systemctl restart<span class="built_in"> network </span>         #重启网络服务</span><br><span class="line"></span><br><span class="line">Ip a / ifconfig                    #查看网络地址。</span><br></pre></td></tr></table></figure>
+
+<p>5.重启或关机后再次连接</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br><span class="line">poweroff</span><br><span class="line"><span class="built_in">shutdown</span> -r now</span><br><span class="line"><span class="built_in">shutdown</span> now</span><br></pre></td></tr></table></figure>
+
+<p>二、手动配置IP。</p>
+<p>1、进入网卡配置文件</p>
+<p><code>cd /etc/sysconfig/network-scripts/</code></p>
+<p>2、ls列出network-scripts目录下的文件</p>
+<p><code>ls /etc/sysconfig/network-scripts/</code></p>
+<p>3、找到ifcfg-ensXX,比如ifcfg-ens33,配置ifcfg-ens33文件</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vi ifcfg-ens33				<span class="comment">#编辑网卡配置文件</span></span><br><span class="line"><span class="comment">###</span></span><br><span class="line">NAME=ens33					<span class="comment">#网卡名称</span></span><br><span class="line">DEVICE=ens33				  <span class="comment">#设备名称</span></span><br><span class="line">ONBOOT=yes					<span class="comment">#开机启动</span></span><br><span class="line">BOOTPROTO=none				<span class="comment">#IP获取方式</span></span><br><span class="line">IPADDR=192.168.59.103		 <span class="comment">#IP地址</span></span><br><span class="line">NETMASK=255.255.255.0		 <span class="comment">#网络掩码</span></span><br><span class="line">GATEWAY=192.168.59.2		  <span class="comment">#网关地址</span></span><br><span class="line">DNS1=192.168.59.2			 <span class="comment">#dns1号地址</span></span><br><span class="line"><span class="comment">###</span></span><br></pre></td></tr></table></figure>
+
+<p>在第三步中，得到子网和掩码，所用IP可以从192.168.59.3-192.168.59.254中随便获取一个。</p>
+<p>4、保存退出，并且重启网络地址。</p>
+<p><code>Systemctl restart network</code></p>
+<p>5.重启或关机后再次连接</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br><span class="line">poweroff</span><br><span class="line"><span class="built_in">shutdown</span> -r now</span><br><span class="line"><span class="built_in">shutdown</span> now</span><br></pre></td></tr></table></figure>
+
+<p>如果IP是自己配置的，则说明网络配置成功。</p>
+<p><code>ip -a  /   ifconfig #查看网卡</code></p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com2019/09/10/linux中yum源的设置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="无荨">
+      <meta itemprop="description" content="自己的选择，再累也要走完">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无荨の博客">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+              
+              <a href="2019/09/10/linux中yum源的设置/" class="post-title-link" itemprop="url">linux中yum源的设置</a>
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-10 19:02:00 / 修改时间：19:16:33" itemprop="dateCreated datePublished" datetime="2019-09-10T19:02:00+08:00">2019-09-10</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <p>Centos中软件的安装：</p>
+<p>*<em>一、  从网络源获取 *</em></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">软件安装：</span><br><span class="line"></span><br><span class="line">yum -y <span class="keyword">install</span> +软件名</span><br></pre></td></tr></table></figure>
+
+<p>*<em>二、从其他网站（自行配置） *</em></p>
+<p><em>1、清理本地官方源</em></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/etc/yum.repos.d/</span>			 <span class="comment">#进入yum源配置文件路径</span></span><br><span class="line">rm -rf *<span class="string">.repo</span>					<span class="comment">#删除.repo类型文件（强烈不建议）</span></span><br><span class="line">或（最优选择）</span><br><span class="line">mkdir bak						<span class="comment">#把.repo类型文件放入bak文件夹下</span></span><br><span class="line">mv *<span class="string">.repo</span> bak/</span><br></pre></td></tr></table></figure>
+
+<p><em>2、配置内网源</em></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">vi NAME.repo					 #创建NAME(可修改)源</span><br><span class="line">################</span><br><span class="line">[base]						   #源标示	不能与其他源名称相同（eg：adv）</span><br><span class="line">name=base						#源名称	不能与其他源名称相同（eg：adv）</span><br><span class="line">baseurl=http:<span class="comment">//…			     #源地址http://...存放软件源地址</span></span><br><span class="line">enabled=<span class="number">1</span>						#是否开启此源（<span class="number">0</span>关闭<span class="number">1</span>开启）</span><br><span class="line">gpgcheck=<span class="number">0</span>					   #是否验证安装包（<span class="number">0</span>验证<span class="number">1</span>不验证）</span><br><span class="line"></span><br><span class="line">[adv]</span><br><span class="line">name=adv</span><br><span class="line">baseurl=http:<span class="comment">//172.16.105.251/adv</span></span><br><span class="line">enabled=<span class="number">1</span></span><br><span class="line">gpgcheck=<span class="number">0</span></span><br><span class="line">（注：一个源与多个源性质一样，一个源有问题，所有的源都不通（包括网络源或者其他源））</span><br><span class="line">#########################</span><br><span class="line"></span><br><span class="line">yum clean all			#清除所有缓存</span><br><span class="line">yum makecache			#生成缓存</span><br></pre></td></tr></table></figure>
+
+<p><em>3、本地源光盘（centos镜像自带）</em></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">mkdir  /iso                       </span><br><span class="line">mount /dev/cdrom /iso                 </span><br><span class="line"></span><br><span class="line">（编辑fstab文件的方法）</span><br><span class="line">A: vim /etc/fstab</span><br><span class="line">##################</span><br><span class="line">/dev/sr0 /iso iso9660 defaults <span class="number">0</span> <span class="number">0</span></span><br><span class="line">##################</span><br><span class="line"></span><br><span class="line">B:echo <span class="string">"/dev/sr0 /iso iso9660 defaults 0 0"</span> &gt;&gt; /etc/fstab</span><br><span class="line">mkdir /etc/yum.repos.d/bak</span><br><span class="line">mv /etc/yum.repos.d<span class="comment">/*.repo /etc/yum.repos.d/bak</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">（编辑iso.repo文件的方法）</span></span><br><span class="line"><span class="comment">1: vim /etc/yum.repos.d/iso.repo</span></span><br><span class="line"><span class="comment">################</span></span><br><span class="line"><span class="comment">[iso]</span></span><br><span class="line"><span class="comment">Name=iso</span></span><br><span class="line"><span class="comment">Baseurl=file:///iso</span></span><br><span class="line"><span class="comment">Disable=1</span></span><br><span class="line"><span class="comment">Gpgcheck=0</span></span><br><span class="line"><span class="comment">##################</span></span><br><span class="line"><span class="comment">2: cat&gt;/etc/yum.repos.d/iso.repo &lt;&lt;QQQ</span></span><br><span class="line"><span class="comment">	[iso]</span></span><br><span class="line"><span class="comment">   Name=iso</span></span><br><span class="line"><span class="comment">   Baseurl=file:///iso</span></span><br><span class="line"><span class="comment">   Disable=1</span></span><br><span class="line"><span class="comment">   Gpgcheck=0</span></span><br><span class="line"><span class="comment">   QQQ</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">3: echo -e "[iso]\nname=iso\baseurl=file:///iso\nenable=1\ngpgcheck=0 "</span></span><br><span class="line"><span class="comment"> &gt; /etc/yum.repos.d/iso.repo</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Yum clean all</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com2019/09/09/网络管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="无荨">
+      <meta itemprop="description" content="自己的选择，再累也要走完">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无荨の博客">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+              
+              <a href="2019/09/09/网络管理/" class="post-title-link" itemprop="url">ISO七层模型</a>
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-09 19:22:00" itemprop="dateCreated datePublished" datetime="2019-09-09T19:22:00+08:00">2019-09-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-10 18:52:48" itemprop="dateModified" datetime="2019-09-10T18:52:48+08:00">2019-09-10</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <p><strong>一、OSI七层模型</strong></p>
+<table>
+<thead>
+<tr>
+<th>层数</th>
+<th>表示</th>
+<th>说明</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>7</td>
+<td>应用层</td>
+<td>HTTP、ftp</td>
+<td>协议</td>
+</tr>
+<tr>
+<td>6</td>
+<td>表示层</td>
+<td>UTF-8</td>
+<td>将应用层协议翻译成计算机可识别的语言</td>
+</tr>
+<tr>
+<td>5</td>
+<td>会话层</td>
+<td></td>
+<td>管理传输层</td>
+</tr>
+<tr>
+<td>4</td>
+<td>传输层</td>
+<td>TCP/UDP</td>
+<td>建立以及断开连接</td>
+</tr>
+<tr>
+<td>3</td>
+<td>网络层</td>
+<td>IP</td>
+<td>1、寻址；2、身份确认</td>
+</tr>
+<tr>
+<td>2</td>
+<td>数据链路层</td>
+<td>MAC物理地址</td>
+<td>两设备间的互相通信</td>
+</tr>
+<tr>
+<td>1</td>
+<td>物理层</td>
+<td>传输媒介</td>
+<td>将0/1转换成光/电信号</td>
+</tr>
+</tbody></table>
+<p>说明：</p>
+<p>1、 物理地址（MAC）：<br>    网卡唯一的身份识别，由12位的十六进制数组组成。</p>
+<pre><code>（PS：每个设备全世界只能找到一个）</code></pre><p>2、数据发送时，是由物理层到应用层逐一打包，而接收时从应用层到物理层层层解封。</p>
+<p><strong>二、 IP</strong></p>
+<p>1.说明</p>
+<p>IP（Internet Protocol）：网络协议</p>
+<p>IP地址一般组成范围：</p>
+<p>[0<del>254].[ 0</del>254].[ 0<del>254].[ 0</del>254]</p>
+<p>2.子网掩码</p>
+<p>作用：划分网段。</p>
+<p>一般有：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">255<span class="selector-class">.255</span><span class="selector-class">.255</span><span class="selector-class">.0</span></span><br><span class="line">255<span class="selector-class">.255</span><span class="selector-class">.0</span><span class="selector-class">.0</span></span><br><span class="line">255<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span></span><br></pre></td></tr></table></figure>
+
+<p>Question：</p>
+<p>怎么查看两个网是否处于同一网段？</p>
+<p>1) 将IP地址和子网掩码（十进制）转化为二进制；</p>
+<p>2) 将转化后的IP地址和子网掩码进行“与”运算；</p>
+<p>3) 将运算后的结果转化为十进制；</p>
+<p>4) 将两个网转化后的十进制进行对比，看是否相同，相同为同一网段，不同反之。</p>
+<p>Eg：</p>
+<pre><code>例如，有两台主机，主机一的IP地址为222.21.160.6，子网掩码为255.255.255.192，主机二的IP地址为222.21.160.73，子网掩码为255.255.255.192。现在主机一要给主机二发送数据，先要判断两个主机是否在同一网段。
+
+主机一
+222.21.160.6    即：11011110.00010101.10100000.00000110
+255.255.255.192 即：11111111.11111111.11111111.11000000
+与运算结果为：      11011110.00010101.10100000.00000000
+十进制形式为（网络地址）：222.21.160.0
+
+主机二
+222.21.160.73   即：11011110.00010101.10100000.01001001
+255.255.255.192 即：11111111.11111111.11111111.11000000
+与运算结果为：      11011110.00010101.10100000.01000000
+十进制形式为（网络地址）：222.21.160.64</code></pre>
+          
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com2019/09/09/博客搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -489,9 +908,26 @@ x-special/nautilus-clipboard</code></pre><p>注意等第3步完成后，在虚�
         
           <a href="../archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+        
       </div>
     
       
@@ -502,7 +938,19 @@ x-special/nautilus-clipboard</code></pre><p>注意等第3步完成后，在虚�
         
           
         
-        <span class="site-state-item-count">1</span>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span>
         
       </div>
